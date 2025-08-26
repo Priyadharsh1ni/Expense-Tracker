@@ -33,6 +33,11 @@ const initialState = {
                 ...state,
                 expoenseList: state.expoenseList.map(expense => expense._id === action.payload._id ? action.payload : expense)
             }   
+        case 'CREATE':
+            return{
+                ...state,
+                expoenseList: [...state.expoenseList, action.payload]
+            }
         default:
             return state
     }

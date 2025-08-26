@@ -27,14 +27,14 @@ async function fetchExpenses(){
 
 async function createExpense(expenseData) {
   try {
-    const response = await fetch(`${API_URL}/api/expenses/`, {
+    const response = await axios.post(`${API_URL}/api/expenses/`,
+        expenseData, {
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...expenseData}),
     })
-    if (!response.ok) throw new Error("Failed to create expense")
     return response.data
     
   } catch (error) {
+  console.log("🚀 ~ createExpense ~ error:", error)
   } finally {
   }
 }

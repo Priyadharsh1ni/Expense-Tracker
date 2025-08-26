@@ -24,10 +24,11 @@ const fetchSummary = () =>{
 }
 
 const createExpense = (data) =>{
+    console.log("🚀 ~ createExpense ~ data:", data)
     return(dispatch)=>{
         service.createExpense(data).then((res) =>{
             dispatch({
-                type: 'EXPENCES',
+                type: 'CREATE',
                 payload: res
             })
         })

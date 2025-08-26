@@ -16,6 +16,7 @@ import {
 const CATEGORIES = ["Food", "Transport", "Shopping", "Utilities", "Entertainment", "Healthcare", "Other"]
 
 export default function ExpenseForm({ expense = null, onCancel = null }) {
+  console.log("🚀 ~ ExpenseForm ~ expense:", expense)
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     description: expense?.description || "",

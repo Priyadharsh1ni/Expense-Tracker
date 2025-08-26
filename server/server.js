@@ -2,18 +2,17 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
+const { router } = require('./routes/index');
 
 const app = express();
 
-// Connect to Database
 connectDB();
 
-// Init Middleware
-app.use(express.json());
-app.use(cors());
 
-// Define Routes
-app.use('/api/expenses', require('./routes/expense'));
+app.use(cors());
+app.use(express.json());
+
+app.use('/api', router);
 
 const PORT = process.env.PORT || 5000;
 

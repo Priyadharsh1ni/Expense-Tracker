@@ -3,7 +3,7 @@ import ExpenseList from "./Components/ExpenseList"
 import ExpenseSummary from "./Components/ExpenseSummary"
 import LoginPage from "./Components/LoginPage"
 import Header from "./Components/Header"
-import { Plus, BarChart3 } from "lucide-react"
+import { Plus, BarChart3, Download } from "lucide-react"
 import { useState } from "react"
 import { AuthContextProvider } from "./Context/authContext"
 import { ToastProvider } from "./Components/hooks/toast"
@@ -17,6 +17,16 @@ function ExpenseTrackerApp() {
     return <Navigate to="/login" replace />
   }
 
+  const exportData = () => {
+    const data = JSON.parse(localStorage.getItem("expenses") || "[]")
+    const csvContent = data.map((row) => Object.values(row).join(",")).join("\n")
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+    const link = document.createElement("a")
+    link.href = URL.createObjectURL(blob)
+    link.setAttribute("download", "expenses.csv")
+    link.click()
+  }
+
   return (
     <div className="min-h-screen bg-blue-50">
       <Header />
@@ -27,6 +37,12 @@ function ExpenseTrackerApp() {
           <div className="flex items-center gap-2 mb-4">
             <BarChart3 className="h-5 w-5 text-primary" />
             <h2 className="text-2xl font-semibold text-primary">Financial Overview</h2>
+            <button
+              onClick={exportData}
+              className="ml-auto bg-primary hover:bg-primary/90 bg-blue-800 flex rounded-lg text-white p-4"
+            >
+              <Download className="h-5 w-5 text-primary" /> Export
+            </button>
           </div>
           <ExpenseSummary />
         </div>
@@ -72,3 +88,4 @@ export default function Page() {
     </AuthContextProvider>
   )
 }
+

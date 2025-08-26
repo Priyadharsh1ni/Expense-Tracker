@@ -27,7 +27,7 @@ const createExpense = (data) =>{
     return(dispatch)=>{
         service.createExpense(data).then((res) =>{
             dispatch({
-                type: 'ADD',
+                type: 'EXPENCES',
                 payload: res
             })
         })

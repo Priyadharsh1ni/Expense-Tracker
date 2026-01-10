@@ -4,12 +4,14 @@ import { useState } from "react"
 import { Wallet, Mail, Lock, Loader2 } from "lucide-react"
 import { useAuth } from "../Context/authContext"
 import { useToast } from "./hooks/toast"
+import { useNavigate } from "react-router-dom"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
 
   const { login } = useAuth()
@@ -28,7 +30,7 @@ export default function LoginPage() {
     addToast(
      "Login successful"
     )
-     window.location.href = "/expenses"; 
+    navigate("/expenses")
      setLoading(false)
   }
 

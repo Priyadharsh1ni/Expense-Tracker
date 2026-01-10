@@ -10,7 +10,7 @@ connectDB();
 
 
 app.use(cors({
-  origin: "https://sweet-education-production.up.railway.app/",
+  origin: "*",
   credentials: true,
 }));
 app.use(express.json());

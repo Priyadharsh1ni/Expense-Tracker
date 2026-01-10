@@ -1,15 +1,12 @@
-import ExpenseForm from "./Components/ExpenseForm"
-import ExpenseList from "./Components/ExpenseList"
-import ExpenseSummary from "./Components/ExpenseSummary"
-import LoginPage from "./Components/LoginPage"
-import Header from "./Components/Header"
-import { Plus, BarChart3, Download } from "lucide-react"
 import { useState } from "react"
-import { AuthContextProvider } from "./Context/authContext"
-import { ToastProvider } from "./Components/hooks/toast"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
+import Header from "../Components/Header"
+import { BarChart3, Download, Plus } from "lucide-react"
+import Expensesummary from "../Components/ExpenseSummary"
+import ExpenseForm from "../Components/ExpenseForm"
+import ExpenseList from "../Components/ExpenseList"
 
-function ExpenseTrackerApp() {
+function Dashboard() {
   const [showForm, setShowForm] = useState(false)
   const auth = localStorage.getItem("user")
 
@@ -17,7 +14,7 @@ function ExpenseTrackerApp() {
     return <Navigate to="/login" replace />
   }
 
-  
+
 
   const exportData = () => {
     const data = JSON.parse(localStorage.getItem("expenses") || "[]")
@@ -46,7 +43,7 @@ function ExpenseTrackerApp() {
               <Download className="h-5 w-5 text-primary" /> Export
             </button>
           </div>
-          <ExpenseSummary />
+          <Expensesummary />
         </div>
 
         {/* Main Content */}
@@ -76,18 +73,4 @@ function ExpenseTrackerApp() {
   )
 }
 
-export default function Page() {
-  return (
-    <AuthContextProvider>
-      <ToastProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/expenses" element={<ExpenseTrackerApp />} />
-          </Routes>
-        </Router>
-      </ToastProvider>
-    </AuthContextProvider>
-  )
-}
-
+export default Dashboard

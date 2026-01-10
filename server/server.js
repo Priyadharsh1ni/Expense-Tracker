@@ -9,7 +9,10 @@ const app = express();
 connectDB();
 
 
-app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: "https://sweet-education-production.up.railway.app/",
+  credentials: true,
+}));
 app.use(express.json());
 
 app.use('/api', router);
